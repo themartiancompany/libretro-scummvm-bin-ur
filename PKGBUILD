@@ -28,9 +28,9 @@ _os="$( \
   uname \
     -o)"
 _evmfs="false"
-_pkg="mame2000"
+_pkg="mame2010"
 _pkgname="libretro-${_pkg}"
-_Pkg="MAME2000"
+_Pkg="MAME2010"
 pkgname="${_pkgname}-bin"
 pkgver="0.139"
 pkgrel=1
