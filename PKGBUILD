@@ -19,10 +19,14 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-# Maintainer: Truocolo <truocolo@aol.com>
-# Maintainer: Truocolo <truocolo@0x6E5163fC4BFc1511Dbe06bB605cc14a3e462332b>
-# Maintainer: Pellegrino Prevete (dvorak) <pellegrinoprevete@gmail.com>
-# Maintainer: Pellegrino Prevete (dvorak) <dvorak@0x87003Bd6C074C713783df04f36517451fF34CBEf>
+# Maintainer:
+#   Truocolo
+#     <truocolo@aol.com>
+#     <truocolo@0x6E5163fC4BFc1511Dbe06bB605cc14a3e462332b>
+# Maintainer:
+#   Pellegrino Prevete (dvorak)
+#     <pellegrinoprevete@gmail.com>
+#     <dvorak@0x87003Bd6C074C713783df04f36517451fF34CBEf>
 
 _os="$( \
   uname \
@@ -32,14 +36,16 @@ _evmfs_available="$( \
     -v \
     "evmfs" || \
     true)"
-if [[ "${_evmfs_available}" != "" ]]; then
-  _evmfs="true"
-elif [[ "${_evmfs_available}" == "" ]]; then
-  _evmfs="false"
+if [[ ! -v "_evmfs" ]]; then
+  if [[ "${_evmfs_available}" != "" ]]; then
+    _evmfs="true"
+  elif [[ "${_evmfs_available}" == "" ]]; then
+    _evmfs="false"
+  fi
 fi
-_pkg="mame2010"
+_pkg="scummvm"
 _pkgname="libretro-${_pkg}"
-_Pkg="MAME2010"
+_Pkg="scummvm"
 pkgname="${_pkgname}-bin"
 pkgver="0.139"
 pkgrel=1
@@ -58,7 +64,7 @@ _http="https://github.com"
 _ns="libretro"
 url="${_http}/${_ns}/${_pkg}-libretro"
 license=(
-  'custom:MAME License'
+  'GPL3'
 )
 depends=(
   'retroarch'
@@ -101,12 +107,12 @@ _lib="${_pkg}_libretro_android.so"
 # will be ready.
 _evmfs_network="17000"
 _evmfs_address="0x151920938488F193735e83e052368cD41F9d9362"
-_evmfs_ns="0x6E5163fC4BFc1511Dbe06bB605cc14a3e462332b"
-_lib_sum="7b982bff20e4238b1e9de219dd57befb6f392cd0633caf2ddfebccd05b3183c2"
+_evmfs_ns="0x926acb6aA4790ff678848A9F1C59E578B148C786"
+_lib_sum="95a0386521942df7d12a52298b0a8d30759236e870e48a3ffe4cfe964b8242a6"
 _http="https://github.com"
 _ns="6xrS42VaMBgMbWRPAiVP"
 _url="${_http}/${_ns}/${pkgname}"
-_commit="a9b2e2277c600e75913d2fed99bf93bcfd153a23"
+_commit="cddc81620543e1533d99c6f20f074f36d33b0dca"
 _evmfs_uri="evmfs://${_evmfs_network}/${_evmfs_address}/${_evmfs_ns}/${_lib_sum}"
 if [[ "${_evmfs}" == "true" ]]; then
   _lib_src="${_lib}.tar.xz::${_evmfs_uri}"
@@ -121,6 +127,12 @@ sha256sums+=(
 )
 
 validgpgkeys=(
+  # Truocolo <truocolo@aol.com>
+  '97E989E6CF1D2C7F7A41FF9F95684DBE23D6A3E9'
+  # Truocolo <truocolo@0x6E5163fC4BFc1511Dbe06bB605cc14a3e462332b>
+  'F690CBC17BD1F53557290AF51FC17D540D0ADEED'
+  # Pellegrino Prevete (dvorak) <dvorak@0x87003Bd6C074C713783df04f36517451fF34CBEf>
+  '12D8E3D7888F741E89F86EE0FEC8567A644F1D16'
 )
 
 package() {

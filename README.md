@@ -19,7 +19,7 @@
 [comment]: <> (License along with this program.)
 [comment]: <> (If not, see <https://www.gnu.org/licenses/>.)
 
-# `libretro-mame2010-bin`
+# `libretro-scummvm-bin`
 
 universal recipe for
 [user repo](
