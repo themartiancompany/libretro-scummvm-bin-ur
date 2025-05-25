@@ -27,7 +27,16 @@
 _os="$( \
   uname \
     -o)"
-_evmfs="false"
+_evmfs_available="$( \
+  command \
+    -v \
+    "evmfs" || \
+    true)"
+if [[ "${_evmfs_available}" != "" ]]; then
+  _evmfs="true"
+elif [[ "${_evmfs_available}" == "" ]]; then
+  _evmfs="false"
+fi
 _pkg="mame2010"
 _pkgname="libretro-${_pkg}"
 _Pkg="MAME2010"
@@ -62,10 +71,11 @@ if [[ "${_os}" != "GNU/Linux" ]] && \
 fi
 optdepends=(
 )
-[[ "${_os}" != "GNU/Linux" ]] && \
-[[ "${_os}" == "Android" ]] && \
+if [[ "${_os}" != "GNU/Linux" ]] && \
+   [[ "${_os}" == "Android" ]]; then
   optdepends+=(
   )
+fi
 makedepends=(
   'coreutils'
 )
@@ -85,12 +95,13 @@ conflicts=(
 source=()
 sha256sums=()
 _lib="${_pkg}_libretro_android.so"
-_evmfs_network="100"
-_evmfs_address="0x69470b18f8b8b5f92b48f6199dcb147b4be96571"
-_evmfs_ns="0x87003Bd6C074C713783df04f36517451fF34CBEf"
-# This is not on the EVMFS, as its too expensive for me currently.
-# Upload it yourself and tell me on which namespace you have uploaded it.
-# Or you know, just publish an Ur package yourself.
+# This file has been published onto Ethereum Holesky testnet.
+# That network may disappear sooner or later, so you'll have to crowd-publish it
+# onto mainnets download after download on the mainnets when crowd-publishing
+# will be ready.
+_evmfs_network="17000"
+_evmfs_address="0x151920938488F193735e83e052368cD41F9d9362"
+_evmfs_ns="0x6E5163fC4BFc1511Dbe06bB605cc14a3e462332b"
 _lib_sum="7b982bff20e4238b1e9de219dd57befb6f392cd0633caf2ddfebccd05b3183c2"
 _http="https://github.com"
 _ns="6xrS42VaMBgMbWRPAiVP"
